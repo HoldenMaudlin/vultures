@@ -41,6 +41,7 @@
 
   <!-- Contact -->
   <section class="page-section" id="Login">
+  <form name="myform" method = "GET" action="successful.jsp" onsubmit= "return validate();" >
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
@@ -86,4 +87,5 @@
         </div>
       </div>
     </div>
+  </form>
   </section>
