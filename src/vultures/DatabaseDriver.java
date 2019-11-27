@@ -141,6 +141,25 @@ public class DatabaseDriver {
 		}
 		return deals;
 	}
+	
+	// Retrieves all deals in the database
+	// Current functionality returns a list of the deal IDs
+	public static ArrayList<Integer> getAllDeals() {
+		ArrayList<Integer> deals = new ArrayList<Integer>();
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Deals");
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				int dealID = resultSet.getInt("dealID");
+				deals.add(dealID);
+			}
+			preparedStatement.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return deals;
+	}
 
 	// Returns whether the given restaurant is registered in the database
 	public static boolean isValidRestaurant(String username, String password) {
