@@ -27,15 +27,14 @@ public class DriverTest {
 			DatabaseDriver.addOrder(1, 2);
 
 		Testing validation methods
-			boolean restaurantTrue = DatabaseDriver.isValidRestaurant(1);
-			boolean restaurantFalse = DatabaseDriver.isValidRestaurant(2);
-			boolean userTrue = DatabaseDriver.isValidUser(1);
-			boolean userFalse = DatabaseDriver.isValidUser(2);
+			boolean restaurantTrue = DatabaseDriver.isValidRestaurant("rtest", "rtest");
+			boolean restaurantFalse = DatabaseDriver.isValidRestaurant("rtest", "rtestf");
+			boolean userTrue = DatabaseDriver.isValidUser("utest", "utest");
+			boolean userFalse = DatabaseDriver.isValidUser("utest", "utestf");
 			System.out.println(restaurantTrue);
 			System.out.println(restaurantFalse);
 			System.out.println(userTrue);
 			System.out.println(userFalse);
-		
 
 		Testing GetOrders
 			ArrayList<Integer> orders = DatabaseDriver.getOrdersByUserID(1);
@@ -50,6 +49,7 @@ public class DriverTest {
 				System.out.println(i);
 			}
 		 */
+		
 		System.out.println("Done");
 	}
 }

@@ -144,10 +144,11 @@ public class DatabaseDriver {
 	}
 
 	// Returns whether the given restaurant is registered in the database
-	public static boolean isValidRestaurant(int restaurantID) {
+	public static boolean isValidRestaurant(String username, String password) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Restaurants WHERE restaurantID=?");
-			preparedStatement.setInt(1, restaurantID);
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Restaurants WHERE username=? AND password=?");
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, password);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				preparedStatement.close();
@@ -161,10 +162,11 @@ public class DatabaseDriver {
 	}
 	
 	// Returns whether the given user is registered in the database
-	public static boolean isValidUser(int userID) {
+	public static boolean isValidUser(String username, String password) {
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE userID=?");
-			preparedStatement.setInt(1, userID);
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE username=? AND password=?");
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, password);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				preparedStatement.close();
@@ -177,4 +179,39 @@ public class DatabaseDriver {
 		return false;
 	}
 	
+	// Returns userID given username
+	public static int getUserID(String username) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Users WHERE username=?");
+			preparedStatement.setString(1, username);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				int userID = resultSet.getInt("userID");
+				preparedStatement.close();
+				resultSet.close();
+				return userID;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
+	// Returns restaurantID given username
+	public static int getRestaurantID(String username) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Restaurants WHERE username=?");
+			preparedStatement.setString(1, username);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				int restaurantID = resultSet.getInt("restaurantID");
+				preparedStatement.close();
+				resultSet.close();
+				return restaurantID;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }
