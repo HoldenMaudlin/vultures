@@ -46,6 +46,7 @@ public class Deals extends HttpServlet {
 		} catch (ParseException e) {
 			out.println("Unable to parse startTime and endTime from string to Timestamp");
 		}
+		
 		double price = Double.parseDouble(priceStr);
 		DatabaseDriver.addDeal(restaurantID, dealName, startTime, endTime, price);
 		out.println("Sucessfully added new deal to the Deals table");
