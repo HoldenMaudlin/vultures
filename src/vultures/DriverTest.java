@@ -3,8 +3,12 @@ package vultures;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 public class DriverTest {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		DatabaseDriver.initConnection();
 		 
@@ -50,6 +54,15 @@ public class DriverTest {
 			}
 		 */
 		
+		/*
+		java.sql.Timestamp startTime = java.sql.Timestamp.valueOf("2019-11-23 10:00:00");
+		java.sql.Timestamp endTime = java.sql.Timestamp.valueOf("2019-11-23 11:30:00");
+		DatabaseDriver.addDeal(1, "No order", startTime, endTime, 10.99);	
+		JSONArray orders = DatabaseDriver.getDealsByRestaurantID(1);
+		JSONObject obj = new JSONObject();
+		obj.put("data", orders);
+		System.out.println(obj.toString());
 		System.out.println("Done");
+		*/
 	}
 }

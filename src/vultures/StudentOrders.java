@@ -11,21 +11,42 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/StudentDeals")
-public class StudentDeals extends HttpServlet {
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+@WebServlet("/StudentOrders")
+public class StudentOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	public StudentDeals() {
+	public StudentOrders() {
         super();
         DatabaseDriver.initConnection();
     }
 
-    // Returns all orders for username in Orders table
+    /* Returns all orders for username in Orders table
+	   The JSON response will be in this format
+	   {
+	       "data": {
+	           "orderID"   : ...,
+	           "dealID"    : ...,
+	           "created_at": ...,
+	           "username"  : ...,
+	           "dealName"  : ...,
+	           "startTime" : ...,
+	           "endTime"   : ...,
+	           "price"     : ...
+	       }
+	   }
+	*/
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		String username = request.getParameter("username");
 		int userID = DatabaseDriver.getUserID(username);
-		// not done yet
+		JSONArray orders = DatabaseDriver.getOrdersByUserID(userID);
+		JSONObject obj = new JSONObject();
+		obj.put("data", orders);
+		out.println(obj.toString());
 	}
 	
 	// This function adds new order to Orders table

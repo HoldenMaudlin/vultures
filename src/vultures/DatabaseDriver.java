@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 
 // Note: Because the classes that correspond to these methods haven't been created
 // yet, I've written them up using manually set parameters and the Timestamp class rather than LocalDate.
@@ -99,18 +102,31 @@ public class DatabaseDriver {
 
 	// Retrieves all orders associated with the given user
 	// Current functionality returns a list of the order IDs
-	public static ArrayList<Integer> getOrdersByUserID(int userID) {
-		ArrayList<Integer> orders = new ArrayList<Integer>();
+	@SuppressWarnings("unchecked")
+	public static JSONArray getOrdersByUserID(int userID) {
+		JSONArray orders = new JSONArray();
 		if(userID == -1) {
 			return orders;
 		}
 		try {
-			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Orders WHERE userID=?");
+			PreparedStatement preparedStatement = connection.prepareStatement(
+					"SELECT o.orderID, o.dealID, o.created_at, r.username, d.dealName, d.startTime, d.endTime, d.price " +
+					"FROM Orders o, Deals d, Restaurants r " +
+					"WHERE o.userID=? AND d.dealID=o.dealID AND r.restaurantID=d.restaurantID");
 			preparedStatement.setInt(1, userID);
 			ResultSet resultSet = preparedStatement.executeQuery();
+			
 			while (resultSet.next()) {
-				int orderID = resultSet.getInt("orderID");
-				orders.add(orderID);
+				JSONObject obj = new JSONObject();
+				obj.put("orderID", resultSet.getInt("orderID"));
+				obj.put("dealID", resultSet.getInt("dealID"));
+				obj.put("created_at", resultSet.getString("created_at"));
+				obj.put("username", resultSet.getString("username"));
+				obj.put("dealName", resultSet.getString("dealName"));
+				obj.put("startTime", resultSet.getString("startTime"));
+				obj.put("endTime", resultSet.getString("endTime"));
+				obj.put("price", resultSet.getDouble("price"));
+				orders.add(obj);
 			}
 			preparedStatement.close();
 			resultSet.close();
@@ -122,8 +138,9 @@ public class DatabaseDriver {
 	
 	// Retrieves all deals associated with the given restaurant
 	// Current functionality returns a list of the deal IDs
-	public static ArrayList<Integer> getDealsByRestaurantID(int restaurantID) {
-		ArrayList<Integer> deals = new ArrayList<Integer>();
+	@SuppressWarnings("unchecked")
+	public static JSONArray getDealsByRestaurantID(int restaurantID) {
+		JSONArray deals = new JSONArray();
 		if(restaurantID == -1) {
 			return deals;
 		}
@@ -132,8 +149,22 @@ public class DatabaseDriver {
 			preparedStatement.setInt(1, restaurantID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				int dealID = resultSet.getInt("dealID");
-				deals.add(dealID);
+				JSONObject obj = new JSONObject();
+				obj.put("dealID", resultSet.getInt("dealID"));
+				obj.put("dealName", resultSet.getString("dealName"));
+				obj.put("startTime", resultSet.getString("startTime"));
+				obj.put("endTime", resultSet.getString("endTime"));
+				obj.put("price", resultSet.getDouble("price"));
+				
+				PreparedStatement pt = connection.prepareStatement("SELECT o.orderID, o.created_at, u.username FROM Orders o, Users u WHERE dealID=? AND o.userID=u.userID");
+				pt.setInt(1, resultSet.getInt("dealID"));
+				ResultSet rs = pt.executeQuery();
+				if (rs.next()) {
+					obj.put("orderID", rs.getInt("orderID"));
+					obj.put("created_at", rs.getString("created_at"));
+					obj.put("username", rs.getString("username"));
+				}
+				deals.add(obj);
 			}
 			preparedStatement.close();
 			resultSet.close();
