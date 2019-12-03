@@ -24,6 +24,10 @@
 
   <!-- Custom styles for this template -->
   <link href="css/agency.min.css" rel="stylesheet">
+  
+     <!-- Custom Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="./js/register.js"></script>
 
 </head>
 
@@ -41,7 +45,7 @@
 
   <!-- Contact -->
   <section class="page-section" id="Login">
-  <form name="myform" method = "GET" action="successful.jsp" onsubmit= "return validate();" >
+  <form id="register" name="myform" method = "GET" action="HomePage.jsp" onsubmit= "return validate();" >
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
@@ -82,6 +86,7 @@
                 <div id="success"></div>
                 <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Register</button>
               </div>
+              <p id="error-text"></p>
             </div>
           </form>
         </div>

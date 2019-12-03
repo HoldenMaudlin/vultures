@@ -1,9 +1,13 @@
 package vultures;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.Socket;
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.util.Scanner;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +21,8 @@ import org.json.simple.JSONObject;
 @WebServlet("/StudentOrders")
 public class StudentOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final int orderQueuePort = 8081;
+	private static final String orderQueueHost = "localhost";
        
 	public StudentOrders() {
         super();
@@ -57,7 +63,10 @@ public class StudentOrders extends HttpServlet {
 		
 		int userID = DatabaseDriver.getUserID(username);
 		int dealID = Integer.parseInt(dealIDStr);
-		DatabaseDriver.addOrder(userID, dealID);
+		
+		OrderThread ot = new OrderThread(userID, dealID);
+		ot.start();
+		//DatabaseDriver.addOrder(userID, dealID);
 		out.println("Sucessfully added new order to the Orders table");
 	}
 

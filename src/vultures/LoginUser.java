@@ -39,9 +39,9 @@ public class LoginUser extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		
-		if (DatabaseDriver.getUserID(username) == -1)
+		if (DatabaseDriver.getUserID(username) != -1) {
 			out.println("User already exists in the database");
-		else {
+		} else {
 			DatabaseDriver.registerUser(username, password, name, email);
 			out.println("User does not exist");
 		}

@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-
+  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -24,6 +24,11 @@
 
   <!-- Custom styles for this template -->
   <link href="css/agency.min.css" rel="stylesheet">
+  
+   <!-- Custom Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="./js/login.js"></script>
+  
 
 </head>
 
@@ -41,7 +46,7 @@
 
   <!-- Form -->
   <section class="page-section" id="Login">
-  	<form name="myform" method = "GET" action="successful.jsp" onsubmit= "return validate();" >
+  	<form id="login" name="login" method = "POST" action="HomePage.jsp">
 	    <div class="container">
 	      <div class="row">
 	        <div class="col-lg-12 text-center">
@@ -80,6 +85,7 @@
 	                <div id="success"></div>
 	            			    <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Login</button>
 	              </div>
+	              <p id="error-text"></p>
 	            </div>
 	          </form>
 	        </div>

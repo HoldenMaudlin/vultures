@@ -3,18 +3,18 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="src/mysql-connector-java-5.1.46 (1).jar"/>
-	<classpathentry kind="lib" path="src/mysql-socket-factory-1.0.15-jar-with-dependencies (1).jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_221">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="src/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/holdenmaudlin/Downloads/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="/Users/holdenmaudlin/Downloads/mysql-socket-factory-1.0.15-jar-with-dependencies.jar"/>
+	<classpathentry kind="lib" path="/Users/holdenmaudlin/Downloads/json-simple-1.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
