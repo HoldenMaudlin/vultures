@@ -21,6 +21,10 @@
   
     <!-- Custom styles for this template -->
   <link href="css/agency.min.css" rel="stylesheet">
+  
+    <!-- Custom Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="./js/addDeal.js"></script>
 
 	<style>
 	#dealsTable {
@@ -117,15 +121,17 @@
   <section class="page-section">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 text-center">
-			<h2 class="section-heading text-uppercase">Add Deal</h2>
-			<input type="text" class= "textbox1" value="Food Name"></input> 
-			<input type="text" class= "textbox2" value="Start Time"></input> 
-			<input type="text" class= "textbox3" value="End Time"></input> 
-			<input type="text" class= "textbox4" value="Price"></input> 
-			
-		</div>
-		<button class="add" onclick= "return add();"> Add </button>
+      	<form id="addDeal" action="AddDeal.jsp">
+	        <div class="col-lg-12 text-center">
+				<h2 class="section-heading text-uppercase">Add Deal</h2>
+				<input id="name" type="text" class= "textbox1" value="Food Name"></input> 
+				<input id="start" type="datetime-local" class= "textbox2" value="Start Time"></input> 
+				<input id="end"  type="datetime-local" class= "textbox3" value="End Time"></input> 
+				<input id="price" type="text" class= "textbox4" value="Price"></input> 
+				
+			</div>
+			<button class="add" type="submit"> Add </button>
+		</form>
 	  </div>
    </div>
  </section>

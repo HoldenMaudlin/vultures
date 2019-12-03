@@ -42,14 +42,17 @@ public class Deals extends HttpServlet {
 		// try to convert startTime and endTime from string to Timestamp
 		try {
 			startTime = Helper.convertToTimestamp(startTimeStr);
-			endTime = Helper.convertToTimestamp(endTimeStr);
+			endTime = Helper.convertToTimestamp(endTimeStr);		
+			double price = Double.parseDouble(priceStr);
+			DatabaseDriver.addDeal(restaurantID, dealName, startTime, endTime, price);
+			out.println("Sucessfully added new deal to the Deals table");
+			System.out.println("Sucessfully added new deal to the Deals table");
 		} catch (ParseException e) {
 			out.println("Unable to parse startTime and endTime from string to Timestamp");
+			System.out.println("Unable to parse startTime and endTime from string to Timestamp");
+			e.printStackTrace();
 		}
-		
-		double price = Double.parseDouble(priceStr);
-		DatabaseDriver.addDeal(restaurantID, dealName, startTime, endTime, price);
-		out.println("Sucessfully added new deal to the Deals table");
+
 	}
 
 }

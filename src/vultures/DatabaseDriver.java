@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -176,9 +177,9 @@ public class DatabaseDriver {
 	
 	// Retrieves all deals in the database
 	// Current functionality returns a list of the deal IDs
-	public static ArrayList<Deal> getAllDeals() {
+	public static List<Deal> getAllDeals() {
 		//	("INSERT INTO Deals(restaurantID, dealName, startTime, endTime, price) VALUES (?, ?, ?, ?, ?)");
-		ArrayList<Deal> deals = new ArrayList<Deal>();
+		List<Deal> deals = new ArrayList<Deal>();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Deals");
 			ResultSet resultSet = preparedStatement.executeQuery();

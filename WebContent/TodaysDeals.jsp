@@ -7,6 +7,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 DatabaseDriver dd = new DatabaseDriver();
+DatabaseDriver.initConnection();
 ArrayList<Deal> deals = new ArrayList<Deal>();
 deals = dd.getAllDeals();
 for(Deal deal : deals) {
