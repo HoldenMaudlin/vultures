@@ -128,7 +128,7 @@
 				<input id="start" type="datetime-local" class= "textbox2" value="Start Time"></input> 
 				<input id="end"  type="datetime-local" class= "textbox3" value="End Time"></input> 
 				<input id="price" type="text" class= "textbox4" value="Price"></input> 
-				
+				<input type="hidden" id="restaurantId" value="${sessionScope.userId}" />
 			</div>
 			<button class="add" type="submit"> Add </button>
 		</form>
@@ -137,9 +137,4 @@
  </section>
  
  <!--  TO DO: Functionality for adding deal to database -->
- <script>
- 	function add(){
- 		
- 	}
- </script>
 

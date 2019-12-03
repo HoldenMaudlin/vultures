@@ -6,13 +6,12 @@ $(document).ready(function(event) {
     	const start = document.getElementById('start').value;
     	const end = document.getElementById('end').value;
     	const price = document.getElementById('price').value;
+    	const restaurantId = document.getElementById('restaurantId').value;
     	
         var form = this;
     	
-    	addDeal(name, start, end, price).then((res) => {
-    		console.log(res);
-    		if (res.includes("Successfully")) {
-        		console.log(res);
+    	addDeal(name, start, end, price, restaurantId).then((res) => {
+    		if (res.includes("Sucessfully")) {
             	form.submit();
         	} else {
         		$('#error-text').text(res);
@@ -21,15 +20,14 @@ $(document).ready(function(event) {
     });
 });
 
-function addDeal(name, start, end, price) {
+function addDeal(name, start, end, price, restaurantId) {
 	const backendUrl = 'Deals';
 	const url = backendUrl + "?dealName=" + encodeURIComponent(name) + 
 		"&startTime=" + encodeURIComponent(start) +
 		"&endTime=" + encodeURIComponent(end) +
 		"&price=" + encodeURIComponent(price) +
-		"&username=hi";
+		"&restaurantId=" + encodeURIComponent(restaurantId);
 	$.ajaxSetup({async: false});
-	console.log(url);
 	return new Promise(function(resolve, reject) {
 		$.ajax({
 		url: url,

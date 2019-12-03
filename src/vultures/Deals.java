@@ -30,7 +30,7 @@ public class Deals extends HttpServlet {
 	// This function adds new deal to Deals table
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
+		String restaurantIdString = request.getParameter("restaurantId");
 		String dealName = request.getParameter("dealName");
 		String startTimeStr = request.getParameter("startTime");
 		String endTimeStr = request.getParameter("endTime");
@@ -38,9 +38,9 @@ public class Deals extends HttpServlet {
 		Timestamp startTime = null;
 		Timestamp endTime = null;
 		
-		int restaurantID = DatabaseDriver.getRestaurantID(username);
 		// try to convert startTime and endTime from string to Timestamp
 		try {
+			int restaurantID = Integer.parseInt(restaurantIdString);
 			startTime = Helper.convertToTimestamp(startTimeStr);
 			endTime = Helper.convertToTimestamp(endTimeStr);		
 			double price = Double.parseDouble(priceStr);
