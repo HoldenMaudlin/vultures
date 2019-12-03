@@ -4,18 +4,14 @@
 <%@ page import="vultures.Deal" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%
 DatabaseDriver dd = new DatabaseDriver();
-DatabaseDriver.initConnection();
-ArrayList<Deal> deals = new ArrayList<Deal>();
+dd.initConnection();
+List<Deal> deals = new ArrayList<Deal>();
 deals = dd.getAllDeals();
-for(Deal deal : deals) {
-    out.println(deal.getName());
-    out.println(deal.getPrice());
-    out.println(deal.getStartTime());
-    out.println(deal.getEndtime());
-}
+pageContext.setAttribute("deals", deals);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,33 +127,11 @@ for(Deal deal : deals) {
 			    <td class="space"></td>
 			    <td class="td">$${deal.price}</td>
 			    <td class="space"></td>
-			    <td class="td">${deal.startTime} - ${deal.endTime}</td>
-			    <td class="space"></td>
-			    <td class="lastCol">  <button class="btn btn-primary text-uppercase" onclick="order()">Order Now</button>  </td>
-			  </tr>
-			  <tr>
-			    <td class="firstCol">DULCE</td>
-			    <td class="space"></td>
-			    <td class="td" >Donut</td>
-			    <td class="space"></td>
-			    <td class="td">$1</td>
-			    <td class="space"></td>
-			    <td class="td">9:00 PM - 10:00 PM</td>
+			    <td class="td">${deal.startTime}</td>
 			    <td class="space"></td>
 			    <td class="lastCol">  <button class="btn btn-primary text-uppercase" onclick="order()">Order Now</button>  </td>
 			  </tr>
 			  <tr class="break"><td colspan="9"></td></tr>
-			  <tr>
-			    <td class="firstCol">EBAES</td>
-			    <td class="space"></td>
-			    <td class="td">Ramen</td>
-			    <td class="space"></td>
-			    <td class="td">$3</td>
-			    <td class="space"></td>
-			    <td class="td">9:00 PM - 11:00 PM</td>
-			    <td class="space"></td>
-			    <td class="lastCol">  <button class="btn btn-primary text-uppercase" onclick="order()">Order Now</button>  </td>
-			  </tr>
 			 </c:forEach>
 			</table>
 	    </div>
