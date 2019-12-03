@@ -2,7 +2,20 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
+<%@ page import="vultures.DatabaseDriver"%>
+<%@ page import="vultures.Deal" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+DatabaseDriver dd = new DatabaseDriver();
+dd.initConnection();
+List<Deal> deals = new ArrayList<Deal>();
+int id = Integer.parseInt(String.valueOf(session.getAttribute("userId")));
+deals = dd.getOrdersByUserID(id);
+pageContext.setAttribute("deals", deals);
+%>
 <head>
 
   <meta charset="utf-8">
@@ -109,7 +122,19 @@
         <!-- TO DO: Fetch this information from current logged in user's database of orders -->
       </div>
 		<table id="dealsTable">
-		  <tr>
+		<c:forEach items="${deals}" var="deal">
+			  <tr>
+			  	<td class="firstCol">${deal.restaurantName}</td>
+			    <td class="space"></td>
+			    <td class="td" >${deal.name}</td>
+			    <td class="space"></td>
+			    <td class="td">$${deal.price}</td>
+			    <td class="space"></td>
+			    <td class="td">${deal.startTime}</td>
+			  </tr>
+			  <tr class="break"><td colspan="7"></td></tr>
+		</c:forEach>
+<!-- 		  <tr>
 		    <td class="firstCol">DULCE</td>
 		    <td class="space"></td>
 		    <td class="td" >Donut</td>
@@ -127,7 +152,7 @@
 		    <td class="td">$3</td>
 		    <td class="space"></td>
 		    <td class="td">9:00 PM - 11:00 PM</td>
-		  </tr>
+		  </tr> -->
 		</table>
     </div>
   </section>
