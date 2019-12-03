@@ -25,8 +25,11 @@ public class LoginRestaurant extends HttpServlet {
 		String password = request.getParameter("password");
 		Boolean check = DatabaseDriver.isValidRestaurant(username, password);
 		
-		if (check)
+		if (check) {
 			out.println("User exists");
+			int restaurantId = DatabaseDriver.getRestaurantID(username);
+			request.getSession().setAttribute("restaurantId", restaurantId);
+		}
 		else out.println("User does not exist");
 	}
 	
@@ -39,10 +42,13 @@ public class LoginRestaurant extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		
-		if (DatabaseDriver.getRestaurantID(username) == -1)
+		if (DatabaseDriver.getRestaurantID(username) != -1) {
 			out.println("User already exists in the database");
+		}
 		else {
 			DatabaseDriver.registerRestaurant(username, password, name, email);
+			int restaurantId = DatabaseDriver.getRestaurantID(username);
+			request.getSession().setAttribute("restaurantId", restaurantId);
 			out.println("User does not exist");
 		}
 	}
