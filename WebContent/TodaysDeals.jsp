@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="vultures.DatabaseDriver"%>
+<%@ page import="vultures.Deal" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+DatabaseDriver dd = new DatabaseDriver();
+ArrayList<Deal> deals = new ArrayList<Deal>();
+deals = dd.getAllDeals();
+for(Deal deal : deals) {
+    out.println(deal.getName());
+    out.println(deal.getPrice());
+    out.println(deal.getStartTime());
+    out.println(deal.getEndtime());
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,12 +116,24 @@
   <section class="page-section">
   	<form name="myform" method = "GET" action="<!-- TO DO: Where is GET request sent to? -->" onsubmit= "<!-- TO DO -->" >
 	    <div class="container">
-	      <div class="row">
-	        <div class="col-lg-12 text-center">
-	          <h2 class="section-heading text-uppercase">Today's Deals</h2>
+	        <div class="row">
+	          <div class="col-lg-12 text-center">
+	            <h2 class="section-heading text-uppercase">Today's Deals</h2>
+	          </div>
 	        </div>
-	      </div>
 			<table id="dealsTable">
+			<c:forEach items="${deals}" var="deal">
+			  <tr>
+			  	<td class="firstCol">${deal.restaurantName}</td>
+			    <td class="space"></td>
+			    <td class="td" >${deal.name}</td>
+			    <td class="space"></td>
+			    <td class="td">$${deal.price}</td>
+			    <td class="space"></td>
+			    <td class="td">${deal.startTime} - ${deal.endTime}</td>
+			    <td class="space"></td>
+			    <td class="lastCol">  <button class="btn btn-primary text-uppercase" onclick="order()">Order Now</button>  </td>
+			  </tr>
 			  <tr>
 			    <td class="firstCol">DULCE</td>
 			    <td class="space"></td>
@@ -129,6 +157,7 @@
 			    <td class="space"></td>
 			    <td class="lastCol">  <button class="btn btn-primary text-uppercase" onclick="order()">Order Now</button>  </td>
 			  </tr>
+			 </c:forEach>
 			</table>
 	    </div>
 	</form>
