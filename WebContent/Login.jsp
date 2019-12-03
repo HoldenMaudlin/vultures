@@ -46,7 +46,7 @@
 
   <!-- Form -->
   <section class="page-section" id="Login">
-  	<form id="login" name="login" method = "POST" action="HomePage.jsp">
+  	<form id="login" name="login" method = "POST" action="TodaysDeals.jsp">
 	    <div class="container">
 	      <div class="row">
 	        <div class="col-lg-12 text-center">

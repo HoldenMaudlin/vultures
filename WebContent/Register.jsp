@@ -45,7 +45,7 @@
 
   <!-- Contact -->
   <section class="page-section" id="Login">
-  <form id="register" name="myform" method = "GET" action="HomePage.jsp" onsubmit= "return validate();" >
+  <form id="register" name="myform" method = "GET" action="TodaysDeals.jsp" onsubmit= "return validate();" >
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
