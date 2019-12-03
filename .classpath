@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="/Users/holdenmaudlin/Downloads/mysql-connector-java-5.1.46.jar"/>
 	<classpathentry kind="lib" path="/Users/holdenmaudlin/Downloads/mysql-socket-factory-1.0.15-jar-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="/Users/holdenmaudlin/Downloads/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/holdenmaudlin/eclipse-workspace/hmaudlin_CSCIL_Assignment3/WebContent/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

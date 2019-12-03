@@ -11,7 +11,6 @@
   <meta name="author" content="">
 
   <title>Vultures</title>
-
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 

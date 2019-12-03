@@ -176,14 +176,20 @@ public class DatabaseDriver {
 	
 	// Retrieves all deals in the database
 	// Current functionality returns a list of the deal IDs
-	public static ArrayList<Integer> getAllDeals() {
-		ArrayList<Integer> deals = new ArrayList<Integer>();
+	public static ArrayList<Deal> getAllDeals() {
+		//	("INSERT INTO Deals(restaurantID, dealName, startTime, endTime, price) VALUES (?, ?, ?, ?, ?)");
+		ArrayList<Deal> deals = new ArrayList<Deal>();
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Deals");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				int dealID = resultSet.getInt("dealID");
-				deals.add(dealID);
+				int restaurantID = resultSet.getInt("restaurantID");
+				String restaurantName = getRestaurantName(restaurantID);
+				String name = resultSet.getString("dealName");
+				Timestamp startTime = resultSet.getTimestamp("startTime");
+				Timestamp endTime = resultSet.getTimestamp("endTime");
+				double price = resultSet.getDouble("price");
+				deals.add(new Deal(name, restaurantName, price, startTime, endTime));
 			}
 			preparedStatement.close();
 			resultSet.close();
@@ -263,5 +269,23 @@ public class DatabaseDriver {
 			e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	// Returns restaurantID given username
+	public static String getRestaurantName(int id) {
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Restaurants WHERE restaurantID=?");
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				String username = resultSet.getString("username");
+				preparedStatement.close();
+				resultSet.close();
+				return username;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }
