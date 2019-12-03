@@ -44,10 +44,10 @@ public class RestaurantDeals extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String username = request.getParameter("username");
 		int restaurantID = DatabaseDriver.getRestaurantID(username);
-		JSONArray deals = DatabaseDriver.getDealsByRestaurantID(restaurantID);
-		JSONObject obj = new JSONObject();
-		obj.put("data", deals);
-		out.println(obj.toString());
+//		//JSONArray deals = DatabaseDriver.getDealsByRestaurantID(restaurantID);
+//		//JSONObject obj = new JSONObject();
+//		obj.put("data", deals);
+//		out.println(obj.toString());
 	}
 	
 	// This function adds new deal to Deals table

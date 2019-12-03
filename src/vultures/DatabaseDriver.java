@@ -104,10 +104,10 @@ public class DatabaseDriver {
 	// Retrieves all orders associated with the given user
 	// Current functionality returns a list of the order IDs
 	@SuppressWarnings("unchecked")
-	public static JSONArray getOrdersByUserID(int userID) {
-		JSONArray orders = new JSONArray();
+	public static List<Deal> getOrdersByUserID(int userID) {
+		List<Deal> deals = new ArrayList<Deal>();
 		if(userID == -1) {
-			return orders;
+			return deals;
 		}
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(
@@ -117,24 +117,20 @@ public class DatabaseDriver {
 			preparedStatement.setInt(1, userID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			
-			while (resultSet.next()) {
-				JSONObject obj = new JSONObject();
-				obj.put("orderID", resultSet.getInt("orderID"));
-				obj.put("dealID", resultSet.getInt("dealID"));
-				obj.put("created_at", resultSet.getString("created_at"));
-				obj.put("username", resultSet.getString("username"));
-				obj.put("dealName", resultSet.getString("dealName"));
-				obj.put("startTime", resultSet.getString("startTime"));
-				obj.put("endTime", resultSet.getString("endTime"));
-				obj.put("price", resultSet.getDouble("price"));
-				orders.add(obj);
+			while (resultSet.next()) {			
+				String restaurantName = resultSet.getString("username");
+				String name = resultSet.getString("dealName");
+				Timestamp startTime = resultSet.getTimestamp("startTime");
+				Timestamp endTime = resultSet.getTimestamp("endTime");
+				double price = resultSet.getDouble("price");
+				deals.add(new Deal(name, restaurantName, price, startTime, endTime));
 			}
 			preparedStatement.close();
 			resultSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return orders;
+		return deals;
 	}
 	
 	// Retrieves all deals associated with the given restaurant
