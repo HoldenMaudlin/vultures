@@ -140,8 +140,8 @@ public class DatabaseDriver {
 	// Retrieves all deals associated with the given restaurant
 	// Current functionality returns a list of the deal IDs
 	@SuppressWarnings("unchecked")
-	public static JSONArray getDealsByRestaurantID(int restaurantID) {
-		JSONArray deals = new JSONArray();
+	public static List<Deal> getDealsByRestaurantID(int restaurantID) {
+		List<Deal> deals = new ArrayList<Deal>();
 		if(restaurantID == -1) {
 			return deals;
 		}
@@ -150,22 +150,12 @@ public class DatabaseDriver {
 			preparedStatement.setInt(1, restaurantID);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				JSONObject obj = new JSONObject();
-				obj.put("dealID", resultSet.getInt("dealID"));
-				obj.put("dealName", resultSet.getString("dealName"));
-				obj.put("startTime", resultSet.getString("startTime"));
-				obj.put("endTime", resultSet.getString("endTime"));
-				obj.put("price", resultSet.getDouble("price"));
-				
-				PreparedStatement pt = connection.prepareStatement("SELECT o.orderID, o.created_at, u.username FROM Orders o, Users u WHERE dealID=? AND o.userID=u.userID");
-				pt.setInt(1, resultSet.getInt("dealID"));
-				ResultSet rs = pt.executeQuery();
-				if (rs.next()) {
-					obj.put("orderID", rs.getInt("orderID"));
-					obj.put("created_at", rs.getString("created_at"));
-					obj.put("username", rs.getString("username"));
-				}
-				deals.add(obj);
+				String restaurantName = getRestaurantName(restaurantID);
+				String name = resultSet.getString("dealName");
+				Timestamp startTime = resultSet.getTimestamp("startTime");
+				Timestamp endTime = resultSet.getTimestamp("endTime");
+				double price = resultSet.getDouble("price");
+				deals.add(new Deal(name, restaurantName, price, startTime, endTime));
 			}
 			preparedStatement.close();
 			resultSet.close();
