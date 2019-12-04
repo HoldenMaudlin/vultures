@@ -12,6 +12,8 @@ dd.initConnection();
 List<Deal> deals = new ArrayList<Deal>();
 deals = dd.getAllDeals();
 pageContext.setAttribute("deals", deals);
+int id = Integer.parseInt(String.valueOf(session.getAttribute("userId")));
+pageContext.setAttribute("userID", id);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +37,11 @@ pageContext.setAttribute("deals", deals);
 	
 	<!-- Custom styles for this template -->
 	<link href="css/agency.min.css" rel="stylesheet">
+	
+	  
+     <!-- Custom Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="./js/order.js"></script>
 
 	<style>
 	#dealsTable {
@@ -111,7 +118,6 @@ pageContext.setAttribute("deals", deals);
 
   <!-- Table where users order from -->
   <section class="page-section">
-  	<form name="myform" method = "GET" action="<!-- TO DO: Where is GET request sent to? -->" onsubmit= "<!-- TO DO -->" >
 	    <div class="container">
 	        <div class="row">
 	          <div class="col-lg-12 text-center">
@@ -120,7 +126,7 @@ pageContext.setAttribute("deals", deals);
 	        </div>
 			<table id="dealsTable">
 			<c:forEach items="${deals}" var="deal">
-			  <tr>
+			  <tr id="${deal.dealID}">
 			  	<td class="firstCol">${deal.restaurantName}</td>
 			    <td class="space"></td>
 			    <td class="td" >${deal.name}</td>
@@ -129,11 +135,13 @@ pageContext.setAttribute("deals", deals);
 			    <td class="space"></td>
 			    <td class="td">${deal.startTime}</td>
 			    <td class="space"></td>
-			    <td class="lastCol">  <button class="btn btn-primary text-uppercase" onclick="order()">Order Now</button>  </td>
+			    <td class="lastCol">  
+			    	<button id="button-${deal.dealID}" class="btn btn-primary text-uppercase" onclick="order(${deal.dealID}, ${userID})">Order Now</button>  
+			    </td>
 			  </tr>
+			  
 			  <tr class="break"><td colspan="9"></td></tr>
 			 </c:forEach>
 			</table>
 	    </div>
-	</form>
   </section>

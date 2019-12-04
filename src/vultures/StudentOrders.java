@@ -58,10 +58,10 @@ public class StudentOrders extends HttpServlet {
 	// This function adds new order to Orders table
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
+		String userIDStr = request.getParameter("userID");
 		String dealIDStr = request.getParameter("dealID");
 		
-		int userID = DatabaseDriver.getUserID(username);
+		int userID = Integer.parseInt(userIDStr); 
 		int dealID = Integer.parseInt(dealIDStr);
 		
 		OrderThread ot = new OrderThread(userID, dealID);
