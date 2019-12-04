@@ -275,4 +275,21 @@ public class DatabaseDriver {
 		}
 		return "";
 	}
+	
+	public static boolean removeDeal(int dealID) {
+		try {
+			if(dealID == -1) {
+				return false;
+			}
+			PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Deals WHERE dealID=?");
+			preparedStatement.setInt(1, dealID);
+			preparedStatement.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+
 }
