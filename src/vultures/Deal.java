@@ -12,11 +12,13 @@ public class Deal {
 	public double price;
 	public String startTime;
 	public String endTime;
+	public int dealID;
 	
-	public Deal(String name, String restaurantName, double price, Timestamp startTime, Timestamp endTime) {
+	public Deal(String name, String restaurantName, double price, Timestamp startTime, Timestamp endTime, int dealID) {
 		this.name = name;
 		this.price = price;
 		this.restaurantName = restaurantName;
+		this.dealID = dealID;
 		
 		Date date = new Date();
 		date.setTime(startTime.getTime());
@@ -30,10 +32,13 @@ public class Deal {
 	public void setPrice(double p) { this.price = p; }
 	public void setName(String n) { this.name = n; }
 	public void setRestaurantName(String rn) { this.restaurantName = rn; }
+	public void setDealID(int id) { this.dealID = id; }
 	
 	public String getName() { return this.name; }
 	public double getPrice() { return this.price; }
 	public String getStartTime() { return this.startTime; }
 	public String getEndtime() { return this.endTime; }
 	public String getRestaurantName() { return this.restaurantName; }
+	public int getDealID() { return this.dealID; }
+
 }

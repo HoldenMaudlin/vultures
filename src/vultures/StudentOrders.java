@@ -46,13 +46,13 @@ public class StudentOrders extends HttpServlet {
 	*/
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
-		int userID = DatabaseDriver.getUserID(username);
-		JSONArray orders = DatabaseDriver.getOrdersByUserID(userID);
-		JSONObject obj = new JSONObject();
-		obj.put("data", orders);
-		out.println(obj.toString());
+//		PrintWriter out = response.getWriter();
+//		String username = request.getParameter("username");
+//		int userID = DatabaseDriver.getUserID(username);
+//		JSONArray orders = DatabaseDriver.getOrdersByUserID(userID);
+//		JSONObject obj = new JSONObject();
+//		obj.put("data", orders);
+//		out.println(obj.toString());
 	}
 	
 	// This function adds new order to Orders table

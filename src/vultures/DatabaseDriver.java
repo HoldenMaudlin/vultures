@@ -123,7 +123,8 @@ public class DatabaseDriver {
 				Timestamp startTime = resultSet.getTimestamp("startTime");
 				Timestamp endTime = resultSet.getTimestamp("endTime");
 				double price = resultSet.getDouble("price");
-				deals.add(new Deal(name, restaurantName, price, startTime, endTime));
+				int id = resultSet.getInt("dealID");
+				deals.add(new Deal(name, restaurantName, price, startTime, endTime, id));
 			}
 			preparedStatement.close();
 			resultSet.close();
@@ -151,7 +152,8 @@ public class DatabaseDriver {
 				Timestamp startTime = resultSet.getTimestamp("startTime");
 				Timestamp endTime = resultSet.getTimestamp("endTime");
 				double price = resultSet.getDouble("price");
-				deals.add(new Deal(name, restaurantName, price, startTime, endTime));
+				int id = resultSet.getInt("dealID");
+				deals.add(new Deal(name, restaurantName, price, startTime, endTime, id));
 			}
 			preparedStatement.close();
 			resultSet.close();
@@ -176,7 +178,8 @@ public class DatabaseDriver {
 				Timestamp startTime = resultSet.getTimestamp("startTime");
 				Timestamp endTime = resultSet.getTimestamp("endTime");
 				double price = resultSet.getDouble("price");
-				deals.add(new Deal(name, restaurantName, price, startTime, endTime));
+				int id = resultSet.getInt("dealID");
+				deals.add(new Deal(name, restaurantName, price, startTime, endTime, id));
 			}
 			preparedStatement.close();
 			resultSet.close();
