@@ -3,9 +3,6 @@ package vultures;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 public class DriverTest {
 
 	@SuppressWarnings("unchecked")

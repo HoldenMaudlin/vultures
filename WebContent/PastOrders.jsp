@@ -10,10 +10,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%
 DatabaseDriver dd = new DatabaseDriver();
-dd.initConnection();
+DatabaseDriver.initConnection();
 List<Deal> deals = new ArrayList<Deal>();
 int id = Integer.parseInt(String.valueOf(session.getAttribute("userId")));
-deals = dd.getOrdersByUserID(id);
+deals = DatabaseDriver.getOrdersByUserID(id);
 pageContext.setAttribute("deals", deals);
 %>
 <head>

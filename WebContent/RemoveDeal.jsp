@@ -2,7 +2,20 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
+<%@ page import="vultures.DatabaseDriver"%>
+<%@ page import="vultures.Deal" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+DatabaseDriver dd = new DatabaseDriver();
+DatabaseDriver.initConnection();
+List<Deal> deals = new ArrayList<Deal>();
+int id = Integer.parseInt(String.valueOf(session.getAttribute("userId")));
+deals = DatabaseDriver.getOrdersByUserID(id);
+pageContext.setAttribute("deals", deals);
+%>
 <head>
 
   <meta charset="utf-8">
@@ -104,8 +117,6 @@
 
 </head>
 
-
-
 <body id="page-top">
 
   <!-- Navigation -->
@@ -128,6 +139,27 @@
         <!-- TO DO: Fetch this information from current logged in user's database of orders -->
       </div>
 		<table id="myTable">
+		<c:forEach items="${deals}" var="deal">
+			  <tr>
+			  	<td> <input type= "radio" name= "checked" class= "select" id= 0 value= "false" onclick= "changeVal(${deal.dealID})"/></td>
+			  	<td class="firstCol">${deal.restaurantName}</td>
+			    <td class="space"></td>
+			    <td class="td" >${deal.name}</td>
+			    <td class="space"></td>
+			    <td class="td">$${deal.price}</td>
+			    <td class="space"></td>
+			    <td class="td">${deal.startTime}</td>
+			    <td class="lastCol">  
+			    	<button id="button-${deal.dealID}" class="btn btn-primary text-uppercase" onclick="order(${deal.dealID}, ${restaurantID})">Remove</button>  
+			    </td>
+			  </tr>
+			  <tr class="break"><td colspan="7"></td></tr>
+		</c:forEach>
+		<tr>
+			<td>
+			</td>
+		</tr>
+		<!--  
 		  <tr>
 		  	<td> <input type= "radio" name= "checked" class= "select" id= 0 value= "false" onclick= "changeVal(id)"/></td>
 		    <td class="firstCol">Coffee</td>
@@ -160,6 +192,7 @@
 		    <td class="space"></td>
 		    <td class="td">11:00 PM 11/27</td>
 		 </tr>
+		 -->
 		</table>
 		<button class= "remove" onclick="return remove();">
 			Remove
@@ -171,8 +204,17 @@
   <!-- Removes item from table -->
   <script>
   function remove(){
+	  for(var i = 0; i < deals.size(); i++){
+		  if(document.getElementById(i).value == "true"){
+			  document.getElementById("myTable").deleteRow(i);
+			  if(i < deals.size()){
+				  for(var j = deals.size(); j > i; j--)
+				  document.getElementById(j).id++;
+			  }
+		  }
+	  }
 
-	  if(document.getElementById(0).value == "true"){
+	  /* if(document.getElementById(0).value == "true"){
 		  document.getElementById("myTable").deleteRow(0);
 		  document.getElementById(1).id--;
 		  document.getElementById(2).id--;
@@ -185,7 +227,7 @@
 	  
 	  else if(document.getElementById(2).value == "true"){
 		  document.getElementById("myTable").deleteRow(2);  
-	  }  
+	  }   */
   }
   function changeVal(id){
 	  document.getElementById(id).value = "true";

@@ -9,9 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 
 // Note: Because the classes that correspond to these methods haven't been created
 // yet, I've written them up using manually set parameters and the Timestamp class rather than LocalDate.
