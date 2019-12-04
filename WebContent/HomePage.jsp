@@ -251,7 +251,7 @@
         </div>
         <div class="col-sm-4">
           <div class="team-member">
-            <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
+            <img class="mx-auto rounded-circle" src="https://scontent-lax3-1.xx.fbcdn.net/v/t1.15752-9/78489705_780698962343845_4359254705788944384_n.jpg?_nc_cat=101&_nc_ohc=GXPpTWjqmFMAQnvA8YnNsVuKrG_pDkuLmbCrsnksS4lsJ3Hu1iyIAAU2A&_nc_ht=scontent-lax3-1.xx&oh=300438b658bbbd8c932bd5863a6f05b5&oe=5E7BE970" alt="">
             <h4>LongHuy Nguyen</h4>
           </div>
         </div>
