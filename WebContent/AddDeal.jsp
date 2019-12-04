@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
     	<a class="navbar-brand js-scroll-trigger" href="HomePage.jsp"><img src="logo.svg" alt="Vultures Logo" class="navbar-brand js-scroll-trigger" onclick="window.location.href = 'HomePage.jsp';"></a>
-		<a id="removeDeal" onclick="window.location.href = 'RemoveDeal.jsp';">Remove Deal</a> 
+		<!-- <a id="removeDeal" onclick="window.location.href = 'RemoveDeal.jsp';">Remove Deal</a>  -->
 		<a id="pastOrders" onclick="window.location.href = 'AddDeal.jsp';">Add Deal</a>
 		<a id="logOut" onclick="window.location.href = 'HomePage.jsp';">Log Out</a>
     </div>
