@@ -95,8 +95,6 @@
   </section>
   
   <script>
-
-  	
   function changeAction() {
 	var type = document.getElementById("login").dropdown.value;
 	console.log(type);

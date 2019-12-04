@@ -121,7 +121,7 @@
   <section class="page-section">
     <div class="container">
       <div class="row">
-      	<form id="addDeal" action="AddDeal.jsp">
+      	<form id="addDeal" action="ScheduledDeals.jsp">
 	        <div class="col-lg-12 text-center">
 				<h2 class="section-heading text-uppercase">Add Deal</h2>
 				<input id="name" type="text" class= "textbox1" value="Food Name"></input> 
