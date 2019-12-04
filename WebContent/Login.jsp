@@ -65,7 +65,7 @@
 	                </div>
 	                <div class="form-group">
 	                	User Type : 
-		                <select id="dropdown" name = "Age">
+		                <select onchange="changeAction()" id="dropdown" name = "Age">
 							<option value="1"> Customer </option>
 							<option value="2"> Restaurant </option>
 				  		</select>
@@ -93,3 +93,17 @@
 	    </div>
 	</form>
   </section>
+  
+  <script>
+
+  	
+  function changeAction() {
+	var type = document.getElementById("login").dropdown.value;
+	console.log(type);
+	if (type == 1)
+		document.getElementById("login").action = "TodaysDeals.jsp";
+	else 
+		document.getElementById("login").action = "ScheduledDeals.jsp";
+	
+	}
+  </script>

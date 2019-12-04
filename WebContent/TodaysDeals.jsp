@@ -15,6 +15,7 @@ pageContext.setAttribute("deals", deals);
 int id = Integer.parseInt(String.valueOf(session.getAttribute("userId")));
 pageContext.setAttribute("userID", id);
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
